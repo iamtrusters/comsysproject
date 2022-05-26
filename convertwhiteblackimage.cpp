@@ -21,4 +21,5 @@ int main() {
 
 	// Write the image in the same directory
 	imwrite("dung_new.jpg", img_grayscale);
+	return 0;
 }
