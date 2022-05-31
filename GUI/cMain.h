@@ -6,6 +6,7 @@
 #include "wx/imagpng.h"
 #include "wx/image.h"
 #include <wx/mediactrl.h>
+#include <wx/filedlg.h>
 
 class cMain : public wxFrame
 {
@@ -43,13 +44,19 @@ public:
 	//wxMediaCtrl* m_video1 = nullptr;
 	//wxMediaCtrl* m_video2 = nullptr;
 
+	//File Diagle
+	wxFileDialog* m_dialog1 = nullptr;
+	wxFileDialog* m_dialog2 = nullptr;
+	wxFileDialog* m_dialog3 = nullptr;
 
 
 
-
-
+	//Open Video button Event
 	void OnButtonCliked1(wxCommandEvent& evt);
+	//Preview Button Event
 	void OnButtonCliked2(wxCommandEvent& evt);
+	//Export Button Event
+	void OnButtonCliked3(wxCommandEvent& evt);
 	//scrollbar event
 	void ScrollBar1(wxScrollEvent& event);
 
