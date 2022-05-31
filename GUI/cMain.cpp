@@ -1,6 +1,9 @@
 #include "cMain.h"
 #include <string.h>
 
+
+
+
 using namespace std;
 
 
@@ -9,22 +12,23 @@ using namespace std;
 wxBEGIN_EVENT_TABLE(cMain, wxFrame)
 EVT_BUTTON(10001, OnButtonCliked1)
 EVT_BUTTON(10002, OnButtonCliked2)
+EVT_BUTTON(10004, OnButtonCliked3)
 EVT_COMMAND_SCROLL(10003, ScrollBar1)
 wxEND_EVENT_TABLE()
 //
 string a = "                                                                                                    ";
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, a+"Static background remover", wxPoint(30, 30), wxSize(800, 600), wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX))
 {
-	
+
 	//Definition for button
 	m_btn1 = new wxButton(this, 10001, "Open Video", wxPoint(40, 30), wxSize(150, 35));
 	m_btn2 = new wxButton(this, 10002, "New Bkgnd", wxPoint(40, 100), wxSize(150, 35));
 	m_btn3 = new wxButton(this, wxID_ANY, "20", wxPoint(130, 485), wxSize(50, 50));
-	m_btn4 = new wxButton(this, wxID_ANY, "Export", wxPoint(600, 485), wxSize(150, 50));
+	m_btn4 = new wxButton(this, 10004, "Export", wxPoint(600, 485), wxSize(150, 50));
 
 	//Text boxes
-	m_txt1 = new wxTextCtrl(this, wxID_ANY, "", wxPoint(220, 30), wxSize(500, 35), wxALIGN_CENTRE_HORIZONTAL);
-	m_txt2 = new wxTextCtrl(this, wxID_ANY, "", wxPoint(220, 100), wxSize(500, 35), wxALIGN_CENTRE_HORIZONTAL);
+	m_txt1 = new wxTextCtrl(this, wxID_ANY, "", wxPoint(220, 30), wxSize(560, 35), wxALIGN_CENTRE_HORIZONTAL);
+	m_txt2 = new wxTextCtrl(this, wxID_ANY, "", wxPoint(220, 100), wxSize(560, 35), wxALIGN_CENTRE_HORIZONTAL);
 
 	//Slider Bar
 	m_slider = new wxSlider(this, 10003, 20,0,100,wxPoint(200, 500), wxSize(400,20));
@@ -72,6 +76,12 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, a+"Static background remover", wxPoi
 	//m_video2 = new wxMediaCtrl(this, wxID_ANY, "Knight.mp4", wxPoint(450, 200), wxSize(300, 240), wxMC_NO_AUTORESIZE);
 	//m_video1->ShowPlayerControls();
 	//m_video2->ShowPlayerControls();
+
+	//Initialize File Diaglog
+	m_dialog1 = new wxFileDialog(this,"","", "Hello", "*.*", wxFD_OPEN,wxPoint(30,30),wxSize(200,200));
+	m_dialog2 = new wxFileDialog(this, "", "", "Hello", "*.*", wxFD_OPEN, wxPoint(30, 30), wxSize(200, 200));
+	m_dialog3 = new wxFileDialog(this, "", "", "Hello", "*.*", wxFD_SAVE, wxPoint(30, 30), wxSize(200, 200));
+
 }
 
 cMain::~cMain()	
@@ -81,14 +91,26 @@ cMain::~cMain()
 
 void cMain::OnButtonCliked1(wxCommandEvent& evt)
 {
-	m_list1->AppendString(m_txt1->GetValue());
+	m_dialog1->ShowModal();
+	m_txt1->SetLabel(m_dialog1->GetPath());
+	//Draw an image to the Original Box
+	//Code will be included here
 	evt.Skip();
 }
 
 
 void cMain::OnButtonCliked2(wxCommandEvent& evt)
 {
-	m_list2->AppendString(m_txt2->GetValue());
+	m_dialog2->ShowModal();
+	m_txt2->SetLabel(m_dialog2->GetPath());
+	//Draw an image to the Preview Box
+	//Code will be included here
+	evt.Skip();
+}
+
+void cMain::OnButtonCliked3(wxCommandEvent& evt)
+{
+	m_dialog3->ShowModal();
 	evt.Skip();
 }
 
@@ -103,4 +125,3 @@ void cMain::ScrollBar1(wxScrollEvent& evt)
 
 
 
-//parent window takes responsibility to distribute events
