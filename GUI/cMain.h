@@ -7,6 +7,11 @@
 #include "wx/image.h"
 #include <wx/mediactrl.h>
 #include <wx/filedlg.h>
+#include <opencv2/opencv.hpp>
+#include <random>
+#include <iostream>
+#include <vector>
+#include "stdlib.h"
 
 class cMain : public wxFrame
 {
@@ -59,7 +64,6 @@ public:
 	void OnButtonCliked3(wxCommandEvent& evt);
 	//scrollbar event
 	void ScrollBar1(wxScrollEvent& event);
-
 	
 	
 
