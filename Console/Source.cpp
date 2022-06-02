@@ -74,7 +74,8 @@ BGRpixel replacepixel(short tolerance, int Bframe, int Bmedian, int Bbg, int Gfr
 
 cv::Mat addbackground(short tolerance, cv::Mat median, cv::Mat frame, cv::Mat background)
 {
-    // To overwrite the backround to black in the frame
+    // To overwrite the backround to new background in each frame
+    // Things are not background remains
     // return the frame with background FwB
     cv::Mat FwB(median.rows, median.cols, CV_8UC3, cv::Scalar(0, 0, 0));
 
